@@ -20,4 +20,16 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Exchanger"
+
 include(":app")
+include(":domain")
+
+include(":core")
+include(":core:model")
+include(":core:network")
+include(":core:resource")
+include(":core:ui")
+
+include(":feature")
+include(":feature:exchange")
+include(":data")

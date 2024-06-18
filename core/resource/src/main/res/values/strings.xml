@@ -8,7 +8,18 @@
     <string name="exchange_currency_exchange">Currency exchange</string>
     <string name="exchange_sell">Sell</string>
     <string name="exchange_receive">Receive</string>
-    <string name="exchange_balance">%1$f %2$s</string>
+    <string name="exchange_balance">%1$.2f %2$s</string>
+    <string name="exchange_positive_amount">+%1$s</string>
     <string name="exchange_submit">Submit</string>
+
+    <!-- ExchangeSuccessDialog -->
+    <string name="exchange_success_title">Currency converted</string>
+    <string name="exchange_success_description">You have converted %1$.2f %2$s to %3$.2f %4$s</string>
+    <string name="exchange_success_description_fee">You have converted %1$.2f %2$s to %3$.2f %4$s. Commission Fee - %5$.2f %6$s.</string>
+    <string name="exchange_success_done">Done</string>
+
+    <!-- Error -->
+    <string name="error_insufficient_balance">Not enough balance</string>
+    <string name="error_insufficient_balance_commission">Insufficient balance to charge commission</string>
 
 </resources>

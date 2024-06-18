@@ -123,7 +123,7 @@ fun ExchangeScreen(
             title = stringResource(R.string.exchange_sell),
             amount = state.amountSell,
             amountColor = AppTheme.colors.content.primary,
-            balances = state.balances,
+            rates = state.exchangeRate.rates,
             selected = state.selectedCurrencySell,
             onChangeSelected = intent::onChangeCurrencySell,
             onChangeAmount = intent::onChangeAmountSell
@@ -151,12 +151,21 @@ fun ExchangeScreen(
             icon = painterResource(AppTheme.icons.arrowDown),
             iconTint = AppTheme.colors.core.positive,
             title = stringResource(R.string.exchange_receive),
-            amount = state.amountReceive,
-            amountColor = AppTheme.colors.core.positive,
-            balances = state.balances,
+            amount = if (state.isProfitableExchange) {
+                stringResource(R.string.exchange_positive_amount, state.amountReceive)
+            } else {
+                state.amountReceive
+            },
+            amountColor = if (state.isProfitableExchange) {
+                AppTheme.colors.core.positive
+            } else {
+                AppTheme.colors.content.primary
+            },
+            rates = state.exchangeRate.rates,
             selected = state.selectedCurrencyReceive,
+            isEnabledInput = false,
             onChangeSelected = intent::onChangeCurrencyReceive,
-            onChangeAmount = intent::onChangeAmountReceive
+            onChangeAmount = {}
         )
 
         ExchangerButton(

@@ -1,6 +1,6 @@
 package com.exchanger.model.balance
 
 data class Balance(
-    val name: String = String(),
-    val amount: Double = 0.0
+    val currency: String = "",
+    val balance: Double = 0.0
 )

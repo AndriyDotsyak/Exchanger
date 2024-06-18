@@ -20,16 +20,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.font.FontWeight
-import com.exchanger.model.balance.Balance
+import com.exchanger.model.exchange.Rate
 import com.exchanger.ui.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExposedDropdownCurrencies(
+fun ExposedDropdownRates(
     modifier: Modifier = Modifier,
-    balances: List<Balance>,
-    selected: Balance,
-    onChangeSelected: (item: Balance) -> Unit
+    rates: List<Rate>,
+    selected: Rate,
+    onChangeSelected: (item: Rate) -> Unit
 ) {
     var isExpanded by remember { mutableStateOf(false) }
 
@@ -47,7 +47,7 @@ fun ExposedDropdownCurrencies(
         ) {
             Text(
                 modifier = Modifier.width(AppTheme.dimensions.size_44),
-                text = selected.name,
+                text = selected.currency,
                 style = AppTheme.typography.bodyMedium,
                 fontWeight = FontWeight.SemiBold,
                 color = AppTheme.colors.content.primary,
@@ -68,13 +68,13 @@ fun ExposedDropdownCurrencies(
             expanded = isExpanded,
             onDismissRequest = { isExpanded = false }
         ) {
-            for (item in balances) {
+            for (item in rates) {
                 DropdownMenuItem(
                     modifier = Modifier,
                     text = {
                         Text(
                             modifier = Modifier.fillMaxWidth(),
-                            text = item.name,
+                            text = item.currency,
                             style = AppTheme.typography.bodyMedium,
                             fontWeight = FontWeight.SemiBold,
                             maxLines = 1

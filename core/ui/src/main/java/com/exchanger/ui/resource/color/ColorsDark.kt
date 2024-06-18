@@ -13,7 +13,7 @@ object ColorsDark : ThemeColors {
 
     override val background = object : Background {
         override val primary = Color(0xFF242323)
-        override val secondary = Color(0xFF1F1F1F)
+        override val secondary = Color(0xFF353535)
         override val tertiary = Color(0xFF7A7A7A)
         override val active = Color(0xFF3D3D3D)
         override val disabled = Color(0xFF1F1F1F)
@@ -29,6 +29,7 @@ object ColorsDark : ThemeColors {
 
     override val border = object : Border {
         override val primary = Color(0xFF7A7A7A)
+        override val secondary= Color(0xFF7A7A7A)
     }
 
     override val gradient = object : Gradient {

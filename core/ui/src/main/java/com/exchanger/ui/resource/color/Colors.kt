@@ -35,6 +35,7 @@ interface Content {
 
 interface Border {
     val primary: Color
+    val secondary: Color
 }
 
 interface Gradient {

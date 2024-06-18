@@ -3,6 +3,7 @@ plugins {
     KotlinAndroid
     KotlinKapt
     KotlinSymbolProcessing
+    KotlinSerialization
     Hilt
 }
 
@@ -29,10 +30,13 @@ android {
 
 dependencies {
 
+    implementation(project(":core:database"))
     implementation(project(":core:model"))
     implementation(project(":core:network"))
 
     implementationHilt()
+    implementationDatabase()
+    implementationDatastore()
     implementationTest()
 
 }

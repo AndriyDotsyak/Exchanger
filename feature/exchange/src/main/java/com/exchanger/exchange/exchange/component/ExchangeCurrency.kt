@@ -14,11 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import com.exchanger.model.balance.Balance
+import com.exchanger.model.exchange.Rate
 import com.exchanger.ui.component.spacer.HorizontalSpacer
 import com.exchanger.ui.theme.AppTheme
 
@@ -30,11 +32,15 @@ fun ExchangeCurrency(
     title: String,
     amount: String,
     amountColor: Color,
-    balances: List<Balance>,
-    selected: Balance,
-    onChangeSelected: (item: Balance) -> Unit,
+    rates: List<Rate>,
+    selected: Rate,
+    isEnabledInput: Boolean = true,
+    onChangeSelected: (item: Rate) -> Unit,
     onChangeAmount: (amount: String) -> Unit
 ) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+    val focusManager = LocalFocusManager.current
+
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
@@ -70,17 +76,21 @@ fun ExchangeCurrency(
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    /*focusManager.clearFocus()
-                    keyboardController?.hide()*/
+                    keyboardController?.hide()
+                    focusManager.clearFocus()
                 }
             ),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
                 unfocusedContainerColor = Color.Transparent,
+                disabledContainerColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent,
                 cursorColor = AppTheme.colors.content.primary,
-                focusedTextColor = amountColor
+                focusedTextColor = amountColor,
+                unfocusedTextColor = amountColor,
+                disabledTextColor = amountColor
             ),
             placeholder = {
                 Text(
@@ -92,12 +102,13 @@ fun ExchangeCurrency(
                     color = amountColor
                 )
             },
+            enabled = isEnabledInput,
             singleLine = true,
             onValueChange = onChangeAmount
         )
 
-        ExposedDropdownCurrencies(
-            balances = balances,
+        ExposedDropdownRates(
+            rates = rates,
             selected = selected,
             onChangeSelected = onChangeSelected
         )

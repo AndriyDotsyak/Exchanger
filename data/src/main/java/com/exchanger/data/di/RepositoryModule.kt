@@ -1,6 +1,8 @@
 package com.exchanger.data.di
 
-import com.exchanger.data.repository.exchange.DefaultExchangeRepository
+import com.exchanger.data.repository.balance.BalanceDefaultRepository
+import com.exchanger.data.repository.balance.BalanceRepository
+import com.exchanger.data.repository.exchange.ExchangeDefaultRepository
 import com.exchanger.data.repository.exchange.ExchangeRepository
 import dagger.Binds
 import dagger.Module
@@ -12,6 +14,9 @@ import dagger.hilt.components.SingletonComponent
 interface RepositoryModule {
 
     @Binds
-    fun bindExchangeRepository(repository: DefaultExchangeRepository): ExchangeRepository
+    fun bindBalanceRepository(repository: BalanceDefaultRepository): BalanceRepository
+
+    @Binds
+    fun bindExchangeRepository(repository: ExchangeDefaultRepository): ExchangeRepository
 
 }

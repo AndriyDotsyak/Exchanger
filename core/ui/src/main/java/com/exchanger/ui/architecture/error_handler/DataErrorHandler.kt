@@ -1,5 +1,8 @@
 package com.exchanger.ui.architecture.error_handler
 
+import com.exchanger.core.resource.R
+import com.exchanger.model.exception.InsufficientBalance
+import com.exchanger.model.exception.InsufficientBalanceForCommission
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -23,6 +26,12 @@ class DataErrorHandler : ErrorHandler {
 
         when (exception) {
             is CancellationException -> return
+            is InsufficientBalance -> errorChannel.emit(
+                DataError.Resource(R.string.error_insufficient_balance)
+            )
+            is InsufficientBalanceForCommission -> errorChannel.emit(
+                DataError.Resource(R.string.error_insufficient_balance_commission)
+            )
             else -> errorChannel.emit(
                 DataError.Message(exception.message.orEmpty())
             )

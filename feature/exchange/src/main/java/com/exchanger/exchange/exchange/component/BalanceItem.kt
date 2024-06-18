@@ -23,7 +23,7 @@ fun BalanceItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = stringResource(R.string.exchange_balance, balance.amount, balance.name),
+            text = stringResource(R.string.exchange_balance, balance.balance, balance.currency),
             style = AppTheme.typography.bodyMedium,
             fontWeight = FontWeight.SemiBold,
             color = AppTheme.colors.content.primary,

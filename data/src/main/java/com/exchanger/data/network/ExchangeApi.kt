@@ -1,5 +1,6 @@
 package com.exchanger.data.network
 
+import com.exchanger.data.models.ExchangeRateDto
 import com.exchanger.model.exchange.ExchangeRate
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -10,7 +11,7 @@ class ExchangeApi @Inject constructor(
     private val client: HttpClient
 ) {
 
-    suspend fun getExchangeRates(): ExchangeRate {
+    suspend fun getExchangeRates(): ExchangeRateDto {
         return client.get(urlString = "tasks/api/currency-exchange-rates").body()
     }
 

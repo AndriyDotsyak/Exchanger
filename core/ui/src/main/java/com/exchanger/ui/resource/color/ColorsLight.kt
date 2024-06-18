@@ -29,6 +29,7 @@ object ColorsLight : ThemeColors {
 
     override val border = object : Border {
         override val primary = Color(0xFFF1F3F5)
+        override val secondary= Color(0xFFAAA9A9)
     }
 
     override val gradient = object : Gradient {

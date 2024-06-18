@@ -52,7 +52,7 @@ class ExchangeDefaultUseCase @Inject constructor(
 
     private fun getExchangeFee(amount: Double, isFeeRequired: Boolean): Double {
         return if (isFeeRequired) {
-            amount * RATE_EXCHANGE_FEE
+            (amount.toBigDecimal() * RATE_EXCHANGE_FEE.toBigDecimal()).toDouble()
         } else 0.0
     }
 
@@ -62,6 +62,6 @@ class ExchangeDefaultUseCase @Inject constructor(
 
     companion object {
         private const val COUNT_FREE_EXCHANGE = 5
-        private const val RATE_EXCHANGE_FEE = 0.07
+        private const val RATE_EXCHANGE_FEE = 0.007
     }
 }

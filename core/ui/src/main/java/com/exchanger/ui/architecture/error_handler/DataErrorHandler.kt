@@ -1,6 +1,8 @@
 package com.exchanger.ui.architecture.error_handler
 
 import com.exchanger.core.resource.R
+import com.exchanger.model.exception.ExchangeAmountZero
+import com.exchanger.model.exception.IdenticalСurrencies
 import com.exchanger.model.exception.InsufficientBalance
 import com.exchanger.model.exception.InsufficientBalanceForCommission
 import kotlinx.coroutines.CancellationException
@@ -26,6 +28,12 @@ class DataErrorHandler : ErrorHandler {
 
         when (exception) {
             is CancellationException -> return
+            is ExchangeAmountZero -> errorChannel.emit(
+                DataError.Resource(R.string.error_exchange_amount_zero)
+            )
+            is IdenticalСurrencies -> errorChannel.emit(
+                DataError.Resource(R.string.error_identical_currencies)
+            )
             is InsufficientBalance -> errorChannel.emit(
                 DataError.Resource(R.string.error_insufficient_balance)
             )

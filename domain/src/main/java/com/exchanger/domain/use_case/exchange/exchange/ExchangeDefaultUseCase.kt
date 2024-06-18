@@ -2,6 +2,8 @@ package com.exchanger.domain.use_case.exchange.exchange
 
 import com.exchanger.data.repository.balance.BalanceRepository
 import com.exchanger.data.repository.exchange.ExchangeRepository
+import com.exchanger.model.exception.ExchangeAmountZero
+import com.exchanger.model.exception.IdenticalСurrencies
 import com.exchanger.model.exception.InsufficientBalance
 import com.exchanger.model.exception.InsufficientBalanceForCommission
 import com.exchanger.model.exchange.ExchangeResult
@@ -18,6 +20,11 @@ class ExchangeDefaultUseCase @Inject constructor(
         amountSell: Double,
         amountReceive: Double
     ): ExchangeResult {
+        when {
+            currencySell == currencyReceive -> throw IdenticalСurrencies()
+            amountSell == 0.0 -> throw ExchangeAmountZero()
+        }
+
         val balanceSell = balanceRepository.getBalance(currencySell)?.balance ?: 0.0
         val balanceReceive = balanceRepository.getBalance(currencyReceive)?.balance ?: 0.0
 

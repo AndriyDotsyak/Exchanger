@@ -11,6 +11,7 @@ import com.exchanger.exchange.exchange.mvi.ExchangeEffect
 import com.exchanger.exchange.exchange.mvi.ExchangeIntent
 import com.exchanger.exchange.exchange.mvi.ExchangeState
 import com.exchanger.model.balance.Balance
+import com.exchanger.model.exchange.ExchangeRate
 import com.exchanger.model.exchange.Rate
 import com.exchanger.ui.architecture.BaseViewModel
 import com.exchanger.ui.architecture.error_handler.DataError
@@ -52,6 +53,7 @@ class ExchangeViewModel @Inject constructor(
 
     private fun initSubscribes() = with(viewModelScope) {
         launch { getBalancesUseCase.getStream().collectLatest(::handleBalances) }
+        launch { getExchangeRatesUseCase.getStream().collectLatest(::handleExchangeRate) }
         launch { errorStream.collect(::handleError) }
     }
 
@@ -112,6 +114,12 @@ class ExchangeViewModel @Inject constructor(
 
     private fun handleBalances(balances: List<Balance>) {
         updateState { copy(balances = balances) }
+    }
+
+    private fun handleExchangeRate(exchangeRate: ExchangeRate) {
+        updateState {
+            copy(exchangeRate = exchangeRate)
+        }
     }
 
     private fun handleError(dataError: DataError) {
